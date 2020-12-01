@@ -1,22 +1,23 @@
 import React from 'react'
 import styled from 'styled-components';
 import spinner from "../spinner.gif";
+import {Link} from 'react-router-dom'
 const Recipes = ({posts }) => {
     return (
         <MainContainer>
             {!posts.length ? < img src={spinner} alt="lodding ..." />:  
             posts.map((recipe , key)  => (
                
-                <div className="container">
+                <div className="container" key={key}>
                 <h2>{recipe.title}</h2>
                 <p>{recipe.recipe}</p>
                 <span className="badge badge-secondary p-2">{recipe.authorname}</span>
                 <div className="row my-5">
                     <div className="col-sm-2">
-                        <a href= "" className=" btn btn-outline-success">Edit Recipe </a>
+                        <Link  to="/edit-recipe" className=" btn btn-outline-success">Edit Recipe </Link>
                     </div>
                     <div className="col-sm-2">
-                        <a href= "" className=" btn btn-outline-danger">Delete  Recipe </a>
+                        <button to= "/" clbuttonssName=" btn btn-outline-danger">Delete  Recipe </button>
                     </div>
                 </div>
                 </div>
