@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
+import spinner from "../spinner.gif";
 const Recipes = ({posts }) => {
     return (
         <MainContainer>
-            {posts.map((recipe , key)  => (
+            {!posts.length ? < img src={spinner} alt="lodding ..." />:  
+            posts.map((recipe , key)  => (
                
                 <div className="container">
                 <h2>{recipe.title}</h2>
@@ -16,7 +18,6 @@ const Recipes = ({posts }) => {
                     <div className="col-sm-2">
                         <a href= "" className=" btn btn-outline-danger">Delete  Recipe </a>
                     </div>
-
                 </div>
                 </div>
             ))}
@@ -29,5 +30,11 @@ export default Recipes
 /// constainer 
 const  MainContainer = styled.div`
 margin : 7rem 0 ; 
+
+img { 
+    width: 10rem; 
+    display: block;
+    margin :0  auto ; 
+}
 
 `;
