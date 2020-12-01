@@ -18,7 +18,7 @@ export const Navbar = () => {
                     <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Link</a>
+                    <a className="nav-link" href="#">Add Recipe</a>
                 </li>
                 
                 </ul>
