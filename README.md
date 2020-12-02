@@ -2,12 +2,12 @@
 
 
 # ----- first ----- 
-# npm install 
+# >> npm install 
 
 # ----- then ----
-# cd client
-# npm install
+# >> cd client
+# >> npm install
 
 # ----- finally----
-#  cd ..
-# npm run dev
+#  >> cd ..
+#  >> npm run dev
