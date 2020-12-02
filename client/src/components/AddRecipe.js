@@ -20,20 +20,12 @@ const AddRecipe = () => {
     const   changeOnClick  = e =>{ 
         e.preventDefault(); // not lodding the page again 
         
-        // const recipes =  {
-        //     title, 
-        //     recipe, 
-        //     authorname
-
-        // };
+        
             const formData =new FormData(); 
             formData.append("title", title);
             formData.append("recipe", recipe);
             formData.append("authorname", authorname);
             formData.append("recipeImage", fileName);
-
-
-
 
         /// to clear the form after subming it
 
@@ -67,8 +59,7 @@ const AddRecipe = () => {
                      value = {authorname}
                      onChange={e => {setAuthorname(e.target.value)}}
                      placeholder="Cooker Name" 
-                      
-                      />
+                    />
                     
                 </div>
                 <div className="form-group">

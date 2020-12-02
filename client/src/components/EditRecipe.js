@@ -13,49 +13,50 @@ const EditRecipe = (props) => {
 
 
     
-        const onChangeFile = e => {
-            setFileName(e.target.files[0]); 
-        }
+    const onChangeFile = e => {
+        setFileName(e.target.files[0]); 
+    };
 
     // funtion when you click on it it passes the data to the database by axios
-        const   changeOnClick  = e =>{ 
+    const  changeOnClick  = e =>{ 
         e.preventDefault(); // not lodding the page again 
-        
+ 
+
+        const formData =new FormData(); 
+        formData.append("title", title);
+        formData.append("recipe", recipe);
+        formData.append("authorname", authorname);
+        formData.append("recipeImage", fileName);
 
 
-            const formData =new FormData(); 
-            formData.append("title", title);
-            formData.append("recipe", recipe);
-            formData.append("authorname", authorname);
-            formData.append("recipeImage", fileName);
-
-
-            /// to clear the form after subming it
-            setTitle('');
-            setRecipe('');
-            setAuthorname('');
+        /// to clear the form after subming it
+        setTitle('');
+        setRecipe('');
+        setAuthorname('');
 
 
 
-            /// sending it to the MongoDb using axios
-            axios.put(`/recipes/update/${props.match.params.id}`,formData)
-            .then(res => setMassege(res.data))
-            .catch(err => {
-                console.log(err);
-            })
-        };
+        /// sending it to the MongoDb using axios
+        axios.put(`/recipes/update/${props.match.params.id}`,formData)
+        .then(res => setMassege(res.data))
+        .catch(err => {
+            console.log(err);
+        })
+    };
 
-        useEffect(() => {
-            axios.get(`/recipes/${props.match.params.id}`)
-            .then(res => [
-                setTitle(res.data.title),
-                setRecipe(res.data.recipe),
-                setAuthorname(res.data.authorname),
-                setFileName(res.data.recipeImage)
+    useEffect(() => {
+        axios.get(`/recipes/${props.match.params.id}`)
+        .then(res => [
+            setTitle(res.data.title),
+            setRecipe(res.data.recipe),
+            setAuthorname(res.data.authorname),
+            setFileName(res.data.recipeImage)
 
-            ])
-            .catch(error => console.log(error));
-        },[]) ;
+        ])
+        .catch(error => {
+            console.log(error)
+        });
+    },[props.match.params.id]) ;
 
     return (
 

@@ -1,17 +1,18 @@
 const express =require('express'); 
 const router = express.Router(); 
 
-/// multer for upluding images 
+/// multer for uploding images 
 const multer = require("multer");
-
 /// bring the recipe shcema
 const Recipes = require('../models/recipes');
+
+
 
 // store our file <<<image>>>>and call  it
 /// the functionalty of storing the images
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, "./client/public/uploads") ///where store the image
+        callback(null, "./client/public/uploads/") ///where store the image
     },
     filename:(req,file,callback) => {
         callback(null, file.originalname);
@@ -30,7 +31,7 @@ router.get('/', (req,res) => {
 //REQUEST ADD NEW RECIPE
 router.post('/add', upload.single("recipeImage"),  (req,res) => {
     const newRecipe = new Recipes({
-        // adding tthem  to the schema 
+        // adding them  to the schema 
         title : req.body.title, 
         recipe: req.body.recipe, 
         authorname: req.body.authorname,
