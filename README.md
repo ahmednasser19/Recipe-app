@@ -3,12 +3,12 @@
 
 # Istalation Guide 
 
-#FIRST 
+# FIRST 
 
->>> npm install 
+# npm install 
 
-# >> cd client
->>> npm install
+# cd client
+# npm install
 
-# >> cd ..
->> npm run dev
+#  cd ..
+# npm run dev
