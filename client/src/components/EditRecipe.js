@@ -9,20 +9,31 @@ const EditRecipe = (props) => {
     const [recipe , setRecipe] = useState('');
     const [authorname , setAuthorname] = useState('');
     const [message , setMassege] = useState('');
+    const [fileName , setFileName] = useState("");
 
+
+    
+    const onChangeFile = e => {
+        setFileName(e.target.files[0]); 
+    }
 
     // funtion when you click on it it passes the data to the database by axios
     const   changeOnClick  = e =>{ 
         e.preventDefault(); // not lodding the page again 
         
-        const recipes =  {
-            title, 
-            recipe, 
-            authorname
 
-        };
+
+      
+
+
+        const formData =new FormData(); 
+        formData.append("title", title);
+        formData.append("recipe", recipe);
+        formData.append("authorname", authorname);
+        formData.append("recipeImage", fileName);
+
+
         /// to clear the form after subming it
-
         setTitle('');
         setRecipe('');
         setAuthorname('');
@@ -30,7 +41,7 @@ const EditRecipe = (props) => {
 
 
         /// sending it to the MongoDb using axios
-        axios.put(`/recipes/update/${props.match.params.id}`,recipes)
+        axios.put(`/recipes/update/${props.match.params.id}`,formData)
         .then(res => setMassege(res.data))
         .catch(err => {
             console.log(err);
@@ -42,7 +53,8 @@ const EditRecipe = (props) => {
         .then(res => [
             setTitle(res.data.title),
             setRecipe(res.data.recipe),
-            setAuthorname(res.data.authorname)
+            setAuthorname(res.data.authorname),
+            setFileName(res.data.recipeImage)
 
         ])
         .catch(error => console.log(error));
@@ -83,6 +95,10 @@ const EditRecipe = (props) => {
                     value = {recipe}
                     onChange={e => {setRecipe(e.target.value)}}
                     rows="3"></textarea>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="file">Choose Recipe Iamge</label>
+                    <input type="file" filename="recipeImage" className="form-control-file"  onChange={onChangeFile}/>
                 </div>
                 <button type="submit" className="btn btn-primary">Edit Recipe</button>
             </form>

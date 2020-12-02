@@ -8,6 +8,8 @@ const Recipe  = (props) => {
     const [title , setTitle] = useState('');
     const [recipe , setRecipe] = useState('');
     const [authorname , setAuthorname] = useState('');
+    const [fileName , setFileName] = useState("");
+
 
     // get the data form DB
     useEffect(() => {
@@ -15,15 +17,16 @@ const Recipe  = (props) => {
         .then(res => [
             setTitle(res.data.title),
             setRecipe(res.data.recipe),
-            setAuthorname(res.data.authorname)
-
+            setAuthorname(res.data.authorname),
+            setFileName(res.data.recipeImage)
         ])
         .catch(error => console.log(error));
-    },[props]) ;
+    },[]) ;
 
 
     return (    
             <MainContainer>
+                <img src={`/uploads/${fileName}`} alt="..." style={{margin : "0 auto ", width:"40%" ,display :"flex"}} />
                 {!title || !recipe ||! authorname ? <img src={spinner} alt="Lodding..."/> : 
                 <>
                     <h2>{title}</h2>
@@ -44,6 +47,9 @@ export default Recipe
 
 ///MAIN CONTAINER
 const MainContainer = styled.div`
+        
+        
+
         margin : 6rem ; 
         padding: 3rem 14rem;
 

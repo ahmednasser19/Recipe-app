@@ -9,18 +9,32 @@ const AddRecipe = () => {
     const [recipe , setRecipe] = useState('');
     const [authorname , setAuthorname] = useState('');
     const [message , setMassege] = useState('');
+    const [fileName , setFileName] = useState("");
 
+    const onChangeFile = e => {
+        setFileName(e.target.files[0]); 
+    }
+ 
 
     // funtion when you click on it it passes the data to the database by axios
     const   changeOnClick  = e =>{ 
         e.preventDefault(); // not lodding the page again 
         
-        const recipes =  {
-            title, 
-            recipe, 
-            authorname
+        // const recipes =  {
+        //     title, 
+        //     recipe, 
+        //     authorname
 
-        };
+        // };
+            const formData =new FormData(); 
+            formData.append("title", title);
+            formData.append("recipe", recipe);
+            formData.append("authorname", authorname);
+            formData.append("recipeImage", fileName);
+
+
+
+
         /// to clear the form after subming it
 
         setTitle('');
@@ -30,7 +44,7 @@ const AddRecipe = () => {
 
 
         /// sending it to the MongoDb using axios
-        axios.post('/recipes/add',recipes)
+        axios.post('/recipes/add',formData)
         .then(res => setMassege(res.data))
         .catch(err => {
             console.log(err);
@@ -73,6 +87,10 @@ const AddRecipe = () => {
                     value = {recipe}
                     onChange={e => {setRecipe(e.target.value)}}
                     rows="3"></textarea>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="file">Choose Recipe Iamge</label>
+                    <input type="file" filename="recipeImage" className="form-control-file"  onChange={onChangeFile}/>
                 </div>
                 <button type="submit" className="btn btn-primary">Add Recipe</button>
             </form>
