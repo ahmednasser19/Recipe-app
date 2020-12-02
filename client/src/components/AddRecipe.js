@@ -8,6 +8,7 @@ const AddRecipe = () => {
     const [title , setTitle] = useState('');
     const [recipe , setRecipe] = useState('');
     const [authorname , setAuthorname] = useState('');
+    const [message , setMassege] = useState('');
 
 
     // funtion when you click on it it passes the data to the database by axios
@@ -30,7 +31,7 @@ const AddRecipe = () => {
 
         /// sending it to the MongoDb using axios
         axios.post('/recipes/add',recipes)
-        .then(res => console.log(res.data))
+        .then(res => setMassege(res.data))
         .catch(err => {
             console.log(err);
         })
@@ -43,6 +44,7 @@ const AddRecipe = () => {
          
         <div className="container">
         <h1>Add New Recipe</h1>
+        <span className="message"> {message}</span>
             <form onSubmit={changeOnClick} encType="multipart/form-data">
                 <div className="form-group">
                     <label htmlFor="authorname">Cooker  Name</label>
@@ -101,5 +103,11 @@ const AddRecipeContainer = styled.div`
             background: var(--ligh-green);
         }
     }
+    .message {
+        font-weight : 900; 
+        color :tomato ;
+        padding :1rem 1rem 1rem 0 ; 
+    }
+
 
 `;
