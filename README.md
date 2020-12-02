@@ -1,8 +1,6 @@
 # AIM-Recipe-app
 
 
-# Istalation Guide 
-
 # ----- first ----- 
 # npm install 
 
